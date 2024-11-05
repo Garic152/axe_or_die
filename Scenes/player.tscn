@@ -1,12 +1,78 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgg0wp13758sy"]
+[gd_scene load_steps=7 format=3 uid="uid://cgg0wp13758sy"]
 
 [ext_resource type="Texture2D" uid="uid://clkd4mh2td2jr" path="res://Textures/Player/playerSprites_ [version 1.0]/fPlayer_ [human].png" id="1_78pxj"]
-[ext_resource type="Script" path="res://player.gd" id="1_vgjpb"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
+
+[sub_resource type="Animation" id="Animation_l7oy7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d5fyn"]
+resource_name = "idle"
+length = 1.05
+loop_mode = 1
+step = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_u56jn"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(7, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j7s2s"]
+_data = {
+"RESET": SubResource("Animation_l7oy7"),
+"idle": SubResource("Animation_d5fyn"),
+"walk": SubResource("Animation_u56jn")
+}
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_vgjpb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_78pxj")
 hframes = 8
 vframes = 10
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j7s2s")
+}

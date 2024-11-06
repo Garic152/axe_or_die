@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgg0wp13758sy"]
+[gd_scene load_steps=8 format=3 uid="uid://cgg0wp13758sy"]
 
 [ext_resource type="Texture2D" uid="uid://clkd4mh2td2jr" path="res://Textures/Player/playerSprites_ [version 1.0]/fPlayer_ [human].png" id="1_78pxj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
@@ -61,13 +61,18 @@ _data = {
 "walk": SubResource("Animation_u56jn")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58xmg"]
+size = Vector2(10, 3)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_vgjpb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_78pxj")
+offset = Vector2(0, -12)
 hframes = 8
 vframes = 10
 frame = 8
@@ -76,3 +81,7 @@ frame = 8
 libraries = {
 "": SubResource("AnimationLibrary_j7s2s")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_58xmg")

@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkv3nagqoyxgx"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_goblin.gd" id="1_23ow5"]
+[ext_resource type="Texture2D" uid="uid://u14co1ox0kkh" path="res://Textures/Enemies/dungeonSprites_ v1.5/goblin_.png" id="1_pagap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrfmv"]
+atlas = ExtResource("1_pagap")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0mug"]
+atlas = ExtResource("1_pagap")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeequ"]
+atlas = ExtResource("1_pagap")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob3wb"]
+atlas = ExtResource("1_pagap")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx8hh"]
+atlas = ExtResource("1_pagap")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq3me"]
+atlas = ExtResource("1_pagap")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smfe6"]
+atlas = ExtResource("1_pagap")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upxpp"]
+atlas = ExtResource("1_pagap")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ng56"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrfmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0mug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeequ")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob3wb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx8hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq3me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smfe6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upxpp")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_23ow5")
+speed = 20
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_2ng56")
+animation = &"idle"

@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/2.0.1/ldtk-importer/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [input]
 
 ui_left={

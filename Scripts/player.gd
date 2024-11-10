@@ -19,7 +19,18 @@ func updateAnimation():
 		animation.play("idle")
 
 
+func handleCollison():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
 func _physics_process(delta: float) -> void:
 	handleInput()
 	move_and_slide()
+	handleCollison()
 	updateAnimation()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.name == "hitbox":
+		print_debug(area.name)

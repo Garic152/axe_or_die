@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
 @export var speed: int = 35
+@export var maxHealth = 3
+
 @onready var animation = $AnimationPlayer
 @onready var sprite = $Sprite2D
+
+var currentHealth: int = maxHealth
 
 
 func handleInput():
@@ -33,4 +37,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.name == "hitbox":
-		print_debug(area.name)
+		currentHealth -= 1
+	
+	if currentHealth < 0:
+		sprite.visible = false

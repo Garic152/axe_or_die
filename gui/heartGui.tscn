@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://e2r45ku6uclv"]
+
+[ext_resource type="Texture2D" uid="uid://bwprtf60bcn3d" path="res://Textures/Heart/Heart.png" id="1_tbtqi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndu41"]
+atlas = ExtResource("1_tbtqi")
+region = Rect2(18, 39, 19, 18)
+
+[node name="heartGui" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 18)
+offset_right = 20.0
+offset_bottom = 18.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 9)
+texture = SubResource("AtlasTexture_ndu41")

@@ -1,12 +1,22 @@
 extends CharacterBody2D
 
+class_name Player
+
+signal healthChanged
+
 @export var speed: int = 35
 @export var maxHealth = 3
 
 @onready var animation = $AnimationPlayer
+@onready var effects = $Effects
 @onready var sprite = $Sprite2D
 
 var currentHealth: int = maxHealth
+var isHurt: bool = false
+
+
+func _ready() -> void:
+	effects.play("RESET")
 
 
 func handleInput():
@@ -28,6 +38,7 @@ func handleCollison():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 
+
 func _physics_process(delta: float) -> void:
 	handleInput()
 	move_and_slide()
@@ -36,8 +47,19 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.name == "hitbox":
-		currentHealth -= 1
+	if isHurt: return
 	
-	if currentHealth < 0:
+	if area.name == "hitbox":
+		isHurt = true
+		currentHealth -= 1
+		healthChanged.emit(currentHealth)
+		knockback(area.position)
+		effects.play("hurt_blink")
+	if currentHealth <= 0:
 		sprite.visible = false
+	isHurt = false
+
+
+func knockback(source: Vector2):
+	velocity = (source - position).normalized() * 500
+	move_and_slide()

@@ -1,7 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgg0wp13758sy"]
+[gd_scene load_steps=13 format=3 uid="uid://cgg0wp13758sy"]
 
 [ext_resource type="Texture2D" uid="uid://clkd4mh2td2jr" path="res://Textures/Player/playerSprites_ [version 1.0]/fPlayer_ [human].png" id="1_78pxj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
+
+[sub_resource type="Animation" id="Animation_erstn"]
+resource_name = "hurt_blink"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.654902), Color(1, 1, 1, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aw2b4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tk5d4"]
+_data = {
+"RESET": SubResource("Animation_aw2b4"),
+"hurt_blink": SubResource("Animation_erstn")
+}
 
 [sub_resource type="Animation" id="Animation_l7oy7"]
 length = 0.001
@@ -54,9 +92,14 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(7, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_ulta8"]
+resource_name = "hurt"
+step = 0.05
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j7s2s"]
 _data = {
 "RESET": SubResource("Animation_l7oy7"),
+"hurt": SubResource("Animation_ulta8"),
 "idle": SubResource("Animation_d5fyn"),
 "walk": SubResource("Animation_u56jn")
 }
@@ -72,12 +115,25 @@ z_index = 1
 collision_mask = 6
 script = ExtResource("1_vgjpb")
 
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tk5d4")
+}
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 texture = ExtResource("1_78pxj")
 offset = Vector2(0, -12)
 hframes = 8
 vframes = 10
 frame = 8
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 18.0
+color = Color(1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjy7xq3ywdfaf"]
+[gd_scene load_steps=13 format=3 uid="uid://bjy7xq3ywdfaf"]
 
 [ext_resource type="Script" path="res://Scripts/proc_gen_world.gd" id="1_vbsda"]
 [ext_resource type="Texture2D" uid="uid://cal7kwegex13h" path="res://Textures/fantasy_ [version 2.0]/forest_/forest_.png" id="2_c6iqj"]
@@ -7,17 +7,22 @@
 
 [sub_resource type="Gradient" id="Gradient_f7uia"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.279221, 0.688312)
+offsets = PackedFloat32Array(0, 0.298701, 0.688312)
 colors = PackedColorArray(0, 0.2015, 0.93, 1, 0.39, 1, 0.451, 1, 0.629439, 0.395075, 0.219025, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_4lj10"]
-noise_type = 0
-frequency = 0.0214
-fractal_octaves = 2
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tl3qg"]
+frequency = 0.015
+fractal_octaves = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gpa8q"]
 color_ramp = SubResource("Gradient_f7uia")
-noise = SubResource("FastNoiseLite_4lj10")
+noise = SubResource("FastNoiseLite_tl3qg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_urr8n"]
+frequency = 0.325
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yvrpj"]
+noise = SubResource("FastNoiseLite_urr8n")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hhqaf"]
 resource_name = "Ground Tiles"
@@ -287,72 +292,128 @@ resource_name = "Props"
 texture = ExtResource("3_b70nb")
 1:1/size_in_atlas = Vector2i(1, 2)
 1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, 9)
+1:1/0/z_index = 1
+1:1/0/y_sort_origin = -2
 2:1/size_in_atlas = Vector2i(1, 2)
 2:1/0 = 0
+2:1/0/texture_origin = Vector2i(0, 9)
+2:1/0/z_index = 1
+2:1/0/y_sort_origin = -2
 3:1/size_in_atlas = Vector2i(3, 2)
 3:1/0 = 0
+3:1/0/z_index = 1
 6:1/size_in_atlas = Vector2i(1, 2)
 6:1/0 = 0
+6:1/0/texture_origin = Vector2i(0, 9)
+6:1/0/z_index = 1
+6:1/0/y_sort_origin = -2
 7:1/0 = 0
+7:1/0/z_index = 1
 8:1/0 = 0
+8:1/0/z_index = 1
 9:1/0 = 0
+9:1/0/z_index = 1
 10:1/0 = 0
+10:1/0/z_index = 1
 10:2/0 = 0
+10:2/0/z_index = 1
 9:2/0 = 0
+9:2/0/z_index = 1
 8:2/0 = 0
+8:2/0/z_index = 1
 7:2/0 = 0
+7:2/0/z_index = 1
 7:3/0 = 0
+7:3/0/z_index = 1
 8:3/0 = 0
+8:3/0/z_index = 1
 9:3/0 = 0
+9:3/0/z_index = 1
 10:3/0 = 0
+10:3/0/z_index = 1
 10:4/0 = 0
+10:4/0/z_index = 1
 9:4/0 = 0
+9:4/0/z_index = 1
 8:4/0 = 0
+8:4/0/z_index = 1
 7:4/0 = 0
+7:4/0/z_index = 1
 7:5/0 = 0
+7:5/0/z_index = 1
 8:5/0 = 0
+8:5/0/z_index = 1
 9:5/0 = 0
+9:5/0/z_index = 1
 10:5/0 = 0
+10:5/0/z_index = 1
 10:6/0 = 0
+10:6/0/z_index = 1
 9:6/0 = 0
+9:6/0/z_index = 1
 8:6/0 = 0
+8:6/0/z_index = 1
 7:6/0 = 0
+7:6/0/z_index = 1
 6:4/0 = 0
+6:4/0/z_index = 1
 5:4/0 = 0
+5:4/0/z_index = 1
 5:3/0 = 0
+5:3/0/z_index = 1
 6:3/0 = 0
+6:3/0/z_index = 1
 4:3/0 = 0
+4:3/0/z_index = 1
 4:4/0 = 0
+4:4/0/z_index = 1
 2:3/size_in_atlas = Vector2i(2, 2)
 2:3/0 = 0
+2:3/0/z_index = 1
 1:3/0 = 0
+1:3/0/z_index = 1
 1:4/0 = 0
+1:4/0/z_index = 1
 1:5/size_in_atlas = Vector2i(1, 2)
 1:5/0 = 0
+1:5/0/z_index = 1
 2:5/size_in_atlas = Vector2i(1, 2)
 2:5/0 = 0
+2:5/0/z_index = 1
 3:5/size_in_atlas = Vector2i(2, 2)
 3:5/0 = 0
+3:5/0/z_index = 1
 5:5/size_in_atlas = Vector2i(2, 2)
 5:5/0 = 0
+5:5/0/z_index = 1
 1:7/size_in_atlas = Vector2i(1, 2)
 1:7/0 = 0
+1:7/0/z_index = 1
 2:7/size_in_atlas = Vector2i(1, 2)
 2:7/0 = 0
+2:7/0/z_index = 1
 3:7/size_in_atlas = Vector2i(1, 2)
 3:7/0 = 0
+3:7/0/z_index = 1
 4:7/size_in_atlas = Vector2i(1, 2)
 4:7/0 = 0
+4:7/0/z_index = 1
 6:7/size_in_atlas = Vector2i(1, 2)
 6:7/0 = 0
+6:7/0/z_index = 1
 7:7/size_in_atlas = Vector2i(1, 2)
 7:7/0 = 0
+7:7/0/z_index = 1
 8:7/size_in_atlas = Vector2i(1, 2)
 8:7/0 = 0
+8:7/0/z_index = 1
 9:7/size_in_atlas = Vector2i(1, 2)
 9:7/0 = 0
+9:7/0/z_index = 1
 10:7/size_in_atlas = Vector2i(1, 2)
 10:7/0 = 0
+10:7/0/z_index = 1
 
 [sub_resource type="TileSet" id="TileSet_cpaox"]
 terrain_set_0/mode = 0
@@ -371,8 +432,10 @@ sources/0 = SubResource("TileSetAtlasSource_hhqaf")
 sources/1 = SubResource("TileSetAtlasSource_1se3u")
 
 [node name="proc_gen_world" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_vbsda")
 noise_height_text = SubResource("NoiseTexture2D_gpa8q")
+noise_tree_text = SubResource("NoiseTexture2D_yvrpj")
 
 [node name="Water" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_cpaox")
@@ -387,10 +450,12 @@ tile_set = SubResource("TileSet_cpaox")
 tile_set = SubResource("TileSet_cpaox")
 
 [node name="Props" type="TileMapLayer" parent="."]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_cpaox")
 
 [node name="Player" parent="." instance=ExtResource("3_sf4j4")]
+y_sort_enabled = true
 speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)

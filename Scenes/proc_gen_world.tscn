@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjy7xq3ywdfaf"]
+[gd_scene load_steps=17 format=3 uid="uid://bjy7xq3ywdfaf"]
 
 [ext_resource type="Script" path="res://Scripts/proc_gen_world.gd" id="1_vbsda"]
 [ext_resource type="Texture2D" uid="uid://cal7kwegex13h" path="res://Textures/fantasy_ [version 2.0]/forest_/forest_.png" id="2_c6iqj"]
+[ext_resource type="PackedScene" uid="uid://lr2fpu3nd4bx" path="res://gui/heartsContainer.tscn" id="2_nqvge"]
 [ext_resource type="Texture2D" uid="uid://ctyr0myqlkmo0" path="res://Textures/fantasy_ [version 2.0]/forest_/forest_ [resources].png" id="3_b70nb"]
 [ext_resource type="PackedScene" uid="uid://cgg0wp13758sy" path="res://Scenes/player.tscn" id="3_sf4j4"]
+[ext_resource type="PackedScene" uid="uid://dkv3nagqoyxgx" path="res://Scenes/EnemyGoblin.tscn" id="5_hh7f2"]
 
 [sub_resource type="Gradient" id="Gradient_f7uia"]
 interpolation_mode = 1
@@ -52,7 +54,7 @@ texture = ExtResource("2_c6iqj")
 1:5/0/z_index = -1
 1:5/0/terrain_set = 1
 1:5/0/terrain = 0
-1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, 1, 5, 8, 5, 5, 8, 5)
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, 1, 1, 8, 5, 8, 5, 5, 8, 5, 8, 1)
 1:5/0/terrains_peering_bit/right_side = 0
 1:5/0/terrains_peering_bit/bottom_right_corner = 0
 1:5/0/terrains_peering_bit/bottom_side = 0
@@ -60,7 +62,7 @@ texture = ExtResource("2_c6iqj")
 2:5/0/z_index = -1
 2:5/0/terrain_set = 1
 2:5/0/terrain = 0
-2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 1, -8, 5, 0, 5, 8, 5)
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5, -8, 1, 8, 1, 8, 5)
 2:5/0/terrains_peering_bit/right_side = 0
 2:5/0/terrains_peering_bit/bottom_right_corner = 0
 2:5/0/terrains_peering_bit/bottom_side = 0
@@ -70,7 +72,7 @@ texture = ExtResource("2_c6iqj")
 3:5/0/z_index = -1
 3:5/0/terrain_set = 1
 3:5/0/terrain = 0
-3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, 1, -8, 5, -5, 5, -5, 8)
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, 1, -8, 1, -8, 5, -5, 5, -5, 8, -1, 8)
 3:5/0/terrains_peering_bit/bottom_side = 0
 3:5/0/terrains_peering_bit/bottom_left_corner = 0
 3:5/0/terrains_peering_bit/left_side = 0
@@ -78,7 +80,7 @@ texture = ExtResource("2_c6iqj")
 3:6/0/z_index = -1
 3:6/0/terrain_set = 1
 3:6/0/terrain = 0
-3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, 0, -5, -8, -5, 0, -5, 8)
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -8, -1, -8, -1, 8, -5, 8)
 3:6/0/terrains_peering_bit/bottom_side = 0
 3:6/0/terrains_peering_bit/bottom_left_corner = 0
 3:6/0/terrains_peering_bit/left_side = 0
@@ -88,7 +90,7 @@ texture = ExtResource("2_c6iqj")
 1:6/0/z_index = -1
 1:6/0/terrain_set = 1
 1:6/0/terrain = 0
-1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, 0, 5, 8, 5, 0, 5, -8)
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(5, 8, 1, 8, 1, -8, 5, -8)
 1:6/0/terrains_peering_bit/right_side = 0
 1:6/0/terrains_peering_bit/bottom_right_corner = 0
 1:6/0/terrains_peering_bit/bottom_side = 0
@@ -110,7 +112,7 @@ texture = ExtResource("2_c6iqj")
 2:7/0/z_index = -1
 2:7/0/terrain_set = 1
 2:7/0/terrain = 0
-2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 2, 8, -5, 0, -5, -8, -5)
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5, -8, -1, 8, -1, 8, -5)
 2:7/0/terrains_peering_bit/right_side = 0
 2:7/0/terrains_peering_bit/left_side = 0
 2:7/0/terrains_peering_bit/top_left_corner = 0
@@ -120,7 +122,7 @@ texture = ExtResource("2_c6iqj")
 1:7/0/z_index = -1
 1:7/0/terrain_set = 1
 1:7/0/terrain = 0
-1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -1, 8, -5, 5, -5, 5, -8)
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -1, 8, -1, 8, -5, 5, -5, 5, -8, 1, -8)
 1:7/0/terrains_peering_bit/right_side = 0
 1:7/0/terrains_peering_bit/top_side = 0
 1:7/0/terrains_peering_bit/top_right_corner = 0
@@ -128,7 +130,7 @@ texture = ExtResource("2_c6iqj")
 3:7/0/z_index = -1
 3:7/0/terrain_set = 1
 3:7/0/terrain = 0
-3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, -1, -5, -8, -5, -5, -8, -5)
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, -1, -1, -8, -5, -8, -5, -5, -8, -5, -8, -1)
 3:7/0/terrains_peering_bit/left_side = 0
 3:7/0/terrains_peering_bit/top_left_corner = 0
 3:7/0/terrains_peering_bit/top_side = 0
@@ -136,7 +138,7 @@ texture = ExtResource("2_c6iqj")
 4:5/0/z_index = -1
 4:5/0/terrain_set = 1
 4:5/0/terrain = 0
-4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -5, -5, -5, -5, 8, 8, 8)
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, -1, 8, -1, 8, -5, -5, -5, -5, 8, -1, 8)
 4:5/0/terrains_peering_bit/right_side = 0
 4:5/0/terrains_peering_bit/bottom_side = 0
 4:5/0/terrains_peering_bit/bottom_left_corner = 0
@@ -148,7 +150,7 @@ texture = ExtResource("2_c6iqj")
 4:6/0/z_index = -1
 4:6/0/terrain_set = 1
 4:6/0/terrain = 0
-4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -5, -8, -5, 5, 8, 5)
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, 1, -1, -8, -5, -8, -5, 5, 8, 5, 8, 1)
 4:6/0/terrains_peering_bit/right_side = 0
 4:6/0/terrains_peering_bit/bottom_right_corner = 0
 4:6/0/terrains_peering_bit/bottom_side = 0
@@ -160,7 +162,7 @@ texture = ExtResource("2_c6iqj")
 5:6/0/z_index = -1
 5:6/0/terrain_set = 1
 5:6/0/terrain = 0
-5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(5, -8, -8, -8, -8, 5, 5, 5)
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, 1, -8, 1, -8, 5, 5, 5, 5, -8, 1, -8)
 5:6/0/terrains_peering_bit/right_side = 0
 5:6/0/terrains_peering_bit/bottom_right_corner = 0
 5:6/0/terrains_peering_bit/bottom_side = 0
@@ -172,7 +174,7 @@ texture = ExtResource("2_c6iqj")
 5:5/0/z_index = -1
 5:5/0/terrain_set = 1
 5:5/0/terrain = 0
-5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(5, -5, -8, -5, -8, 8, 5, 8)
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -1, 1, 8, 5, 8, 5, -5, -8, -5, -8, -1)
 5:5/0/terrains_peering_bit/right_side = 0
 5:5/0/terrains_peering_bit/bottom_right_corner = 0
 5:5/0/terrains_peering_bit/bottom_side = 0
@@ -441,6 +443,7 @@ texture = ExtResource("3_b70nb")
 
 [sub_resource type="TileSet" id="TileSet_cpaox"]
 physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "water"
 terrain_set_0/terrain_0/color = Color(0.191241, 0.402885, 0.571264, 1)
@@ -486,3 +489,16 @@ speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.75, 0.75)
+
+[node name="Enemy" parent="." instance=ExtResource("5_hh7f2")]
+position = Vector2(413, 312)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(0.75, 0.75)
+transform = Transform2D(0.75, 0, 0, 0.75, 0, 0)
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("2_nqvge")]
+offset_left = 6.66667
+offset_top = 6.66667
+offset_right = 68.6667
+offset_bottom = 24.6667

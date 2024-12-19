@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Tutorial"
-run/main_scene="res://LDTK/levels/Level_0.scn"
+run/main_scene="res://Scenes/proc_gen_world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=144
 config/icon="res://icon.svg"
 
 [display]
@@ -30,6 +31,7 @@ enabled=PackedStringArray("res://addons/2.0.1/ldtk-importer/plugin.cfg")
 [global_group]
 
 player=""
+enemy=""
 
 [input]
 

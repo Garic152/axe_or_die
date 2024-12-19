@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkv3nagqoyxgx"]
+[gd_scene load_steps=14 format=3 uid="uid://dkv3nagqoyxgx"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_goblin.gd" id="1_23ow5"]
 [ext_resource type="Texture2D" uid="uid://u14co1ox0kkh" path="res://Textures/Enemies/dungeonSprites_ v1.5/goblin_.png" id="1_pagap"]
@@ -69,18 +69,25 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2k77x"]
 size = Vector2(11, 15)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1no8x"]
+size = Vector2(10, 6)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_23ow5")
-speed = 10
+speed = 40
+ray_length = 30
+
+[node name="ContextRays" type="Node2D" parent="."]
+position = Vector2(0, -3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -94,3 +101,7 @@ frame_progress = 0.6335
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_2k77x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_1no8x")

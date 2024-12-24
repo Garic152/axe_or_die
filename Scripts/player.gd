@@ -2,17 +2,13 @@ extends CharacterBody2D
 
 class_name Player
 
-signal healthChanged
-
 @export var speed: int = 35
 @export var maxHealth = 3
 
 @onready var animation = $AnimationPlayer
 @onready var effects = $Effects
 @onready var sprite = $Sprite2D
-
-var currentHealth: int = maxHealth
-var isHurt: bool = false
+@onready var health = $Health
 
 
 func _ready() -> void:
@@ -47,17 +43,17 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if isHurt: return
+	if health.isHurt: return
 	
 	if area.name == "hitbox":
-		isHurt = true
-		currentHealth -= 1
-		healthChanged.emit(currentHealth)
+		health.isHurt = true
+		health.currentHealth -= 1
+		health.healthChanged.emit(current_health)
 		knockback(area.position)
 		effects.play("hurt_blink")
-	if currentHealth <= 0:
+	if health.currentHealth <= 0:
 		sprite.visible = false
-	isHurt = false
+	health.isHurt = false
 
 
 func knockback(source: Vector2):

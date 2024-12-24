@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var collision_shape = $CollisionShape2D
 @onready var sprite = $AnimatedSprite2D
 @onready var context_rays_node = $ContextRays
+@onready var health = $Health
 
 @export var speed: int
 @export var ray_length: int
@@ -92,3 +93,7 @@ func _physics_process(delta: float) -> void:
 			follow_player(players[0])
 	move_and_slide()
 	updateAnimation()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

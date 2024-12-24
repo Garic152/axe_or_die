@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkv3nagqoyxgx"]
+[gd_scene load_steps=16 format=3 uid="uid://dkv3nagqoyxgx"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_goblin.gd" id="1_23ow5"]
 [ext_resource type="Texture2D" uid="uid://u14co1ox0kkh" path="res://Textures/Enemies/dungeonSprites_ v1.5/goblin_.png" id="1_pagap"]
+[ext_resource type="Script" path="res://Scripts/health.gd" id="2_17r25"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrfmv"]
 atlas = ExtResource("1_pagap")
@@ -78,6 +79,9 @@ size = Vector2(11, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1no8x"]
 size = Vector2(10, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wg1jk"]
+size = Vector2(12, 16)
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
 z_index = 1
 collision_layer = 2
@@ -85,6 +89,9 @@ collision_mask = 5
 script = ExtResource("1_23ow5")
 speed = 40
 ray_length = 30
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("2_17r25")
 
 [node name="ContextRays" type="Node2D" parent="."]
 position = Vector2(0, -3)
@@ -105,3 +112,12 @@ shape = SubResource("RectangleShape2D_2k77x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_1no8x")
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_wg1jk")
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

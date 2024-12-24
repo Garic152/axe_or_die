@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgg0wp13758sy"]
+[gd_scene load_steps=14 format=3 uid="uid://cgg0wp13758sy"]
 
 [ext_resource type="Texture2D" uid="uid://clkd4mh2td2jr" path="res://Textures/Player/playerSprites_ [version 1.0]/fPlayer_ [human].png" id="1_78pxj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
+[ext_resource type="Script" path="res://Scripts/health.gd" id="2_ip3od"]
 
 [sub_resource type="Animation" id="Animation_aw2b4"]
 length = 0.001
@@ -114,6 +115,10 @@ size = Vector2(12, 16)
 z_index = 1
 collision_mask = 6
 script = ExtResource("1_vgjpb")
+speed = null
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("2_ip3od")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {
@@ -129,10 +134,10 @@ vframes = 10
 frame = 8
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
-offset_left = -20.0
-offset_top = -22.0
-offset_right = 20.0
-offset_bottom = 18.0
+offset_left = -24.0
+offset_top = -29.0
+offset_right = 16.0
+offset_bottom = 11.0
 color = Color(1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

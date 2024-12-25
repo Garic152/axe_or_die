@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clkd4mh2td2jr" path="res://Textures/Player/playerSprites_ [version 1.0]/fPlayer_ [human].png" id="1_78pxj"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
-[ext_resource type="Script" path="res://Scripts/health.gd" id="2_ip3od"]
+[ext_resource type="PackedScene" uid="uid://bp145gmyfs2ny" path="res://Scenes/weapons/axe.tscn" id="2_3b1v2"]
 
 [sub_resource type="Animation" id="Animation_aw2b4"]
 length = 0.001
@@ -115,10 +115,6 @@ size = Vector2(12, 16)
 z_index = 1
 collision_mask = 6
 script = ExtResource("1_vgjpb")
-speed = null
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("2_ip3od")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {
@@ -155,5 +151,8 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_rjvax")
+
+[node name="axe" parent="." instance=ExtResource("2_3b1v2")]
+position = Vector2(15, -2)
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

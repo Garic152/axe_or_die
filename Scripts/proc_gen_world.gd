@@ -1,10 +1,12 @@
 extends Node2D
 
+@onready var hearts_container = $CanvasLayer/heartsContainer
 @onready var water_layer = $Water
 @onready var ground_layer = $Ground
 @onready var grass_layer = $Grass
 @onready var cliff_layer = $Cliffs
 @onready var props_layer = $Props
+@onready var player = $Player
 
 @export var noise_height_text: NoiseTexture2D
 @export var noise_tree_text: NoiseTexture2D
@@ -28,6 +30,10 @@ var ground_border_arr = [Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2
 
 
 func _ready():
+	# setup health management
+	hearts_container.setMaxHearts(player.maxHealth)
+	player.HealthChanged.connect(hearts_container.updateHearts)
+	
 	noise = noise_height_text.noise
 	tree_noise = noise_tree_text.noise
 	stone_noise = noise_stone_text.noise

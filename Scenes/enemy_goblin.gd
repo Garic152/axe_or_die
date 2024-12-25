@@ -1,12 +1,18 @@
 extends CharacterBody2D
 
-@onready var collision_shape = $CollisionShape2D
+@onready var collision_shape = $ray_center
 @onready var sprite = $AnimatedSprite2D
 @onready var context_rays_node = $ContextRays
 @onready var health = $Health
+@onready var effects = $AnimatedSprite2D/Effects
 
 @export var speed: int
 @export var ray_length: int
+
+@export var max_health = 3
+
+var current_health: int = max_health
+var is_hurt: bool = false
 
 var move_directions = [
 	Vector2(1, 0).normalized(),          # 0 degrees
@@ -95,5 +101,19 @@ func _physics_process(delta: float) -> void:
 	updateAnimation()
 
 
+func knockback(source: Vector2):
+	velocity = (global_position - source).normalized() * 500
+	move_and_slide()
+
+
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+	if is_hurt: return
+	
+	if area.is_in_group("weapon"):
+		is_hurt = true
+		current_health -= 1
+		knockback(area.global_position)
+		effects.play("hurt")
+	if current_health <= 0:
+		queue_free()
+	is_hurt = false

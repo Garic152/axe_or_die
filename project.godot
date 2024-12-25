@@ -36,6 +36,7 @@ enabled=PackedStringArray("res://addons/2.0.1/ldtk-importer/plugin.cfg")
 
 player=""
 enemy=""
+weapon=""
 
 [input]
 

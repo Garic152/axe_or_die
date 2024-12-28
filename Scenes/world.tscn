@@ -11,4 +11,3 @@ tile_set = ExtResource("1_aqkvb")
 
 [node name="Player" parent="." instance=ExtResource("1_02ie2")]
 position = Vector2(109, 67)
-speed = 35

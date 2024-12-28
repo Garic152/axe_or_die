@@ -111,7 +111,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("weapon"):
 		is_hurt = true
-		current_health -= 1
+		current_health -= area.damage
 		knockback(area.global_position)
 		effects.play("hurt")
 	if current_health <= 0:

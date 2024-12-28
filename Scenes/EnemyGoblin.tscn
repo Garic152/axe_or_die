@@ -72,6 +72,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Animation" id="Animation_456up"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_llt37"]
 resource_name = "hurt"
 length = 0.2
@@ -88,9 +91,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.1512, 0.56, 0.178453, 0.756863), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_456up"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1fctq"]
 _data = {

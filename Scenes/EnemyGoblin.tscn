@@ -109,10 +109,11 @@ size = Vector2(12, 16)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
 z_index = 1
+y_sort_enabled = true
 collision_layer = 2
-collision_mask = 5
+collision_mask = 7
 script = ExtResource("1_23ow5")
-speed = 40
+speed = 70
 ray_length = 30
 
 [node name="ContextRays" type="Node2D" parent="."]
@@ -155,5 +156,9 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_wg1jk")
+
+[node name="hurt" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

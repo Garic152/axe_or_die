@@ -151,4 +151,12 @@ collision_mask = 3
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_rjvax")
 
+[node name="hurt" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

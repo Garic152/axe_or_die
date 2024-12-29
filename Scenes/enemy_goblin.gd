@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var context_rays_node = $ContextRays
 @onready var health = $Health
 @onready var effects = $AnimatedSprite2D/Effects
+@onready var is_hurt: Timer = $hurt
 
 @export var speed: int
 @export var ray_length: int
@@ -12,7 +13,6 @@ extends CharacterBody2D
 @export var max_health = 3
 
 var current_health: int = max_health
-var is_hurt: bool = false
 
 var move_directions = [
 	Vector2(1, 0).normalized(),          # 0 degrees
@@ -101,19 +101,18 @@ func _physics_process(delta: float) -> void:
 	updateAnimation()
 
 
-func knockback(source: Vector2):
-	velocity = (global_position - source).normalized() * 500
+func knockback(source: Vector2, knockback: int):
+	velocity = (global_position - source).normalized() * 100 * knockback
 	move_and_slide()
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if is_hurt: return
+	if is_hurt.is_stopped() == false: return
 	
 	if area.is_in_group("weapon"):
-		is_hurt = true
+		is_hurt.start()
 		current_health -= area.damage
-		knockback(area.global_position)
+		knockback(area.global_position, area.knockback)
 		effects.play("hurt")
 	if current_health <= 0:
 		queue_free()
-	is_hurt = false

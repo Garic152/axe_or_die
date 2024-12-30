@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal died
+
 @onready var collision_shape = $ray_center
 @onready var sprite = $AnimatedSprite2D
 @onready var context_rays_node = $ContextRays
@@ -115,4 +117,5 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		knockback(area.global_position, area.knockback)
 		effects.play("hurt")
 	if current_health <= 0:
+		emit_signal("died")
 		queue_free()

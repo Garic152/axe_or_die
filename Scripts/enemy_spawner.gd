@@ -4,6 +4,8 @@ extends Node
 
 var ground_layer = TileMapLayer
 var player = CharacterBody2D
+var counter = RichTextLabel
+var killed_enemies: int = 0
 
 var spawn_timer = 2.0  # Seconds between spawns
 var time_since_last_spawn = 0.0
@@ -13,11 +15,17 @@ var ground_border_arr = [Vector2i(-1, -1), Vector2i(1, 5), Vector2i(2, 5), Vecto
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var current_scene = get_tree().get_current_scene()
-	if current_scene and current_scene.has_node("Player") and current_scene.has_node("Ground"):
-		player = current_scene.get_node("Player")
-		ground_layer = current_scene.get_node("Ground")
+	if current_scene:
+		if current_scene.has_node("Player"):
+			player = current_scene.get_node("Player") as CharacterBody2D
+		if current_scene.has_node("Ground"):
+			ground_layer = current_scene.get_node("Ground") as TileMapLayer
+		if current_scene.has_node("CanvasLayer/Counter"):
+			counter = current_scene.get_node("CanvasLayer/Counter") as RichTextLabel
 	else:
-		print(error_string(0))
+		print("rip: Current scene not found")
+	
+	
 
 
 func _process(delta: float) -> void:
@@ -44,4 +52,10 @@ func spawn_enemy() -> void:
 	if ground_layer.get_cell_atlas_coords(grid_position) == Vector2i(2, 6):
 		var enemy_inst = enemy.instantiate()
 		enemy_inst.global_position = spawn_position
-		get_tree().root.add_child(enemy_inst)
+		get_tree().current_scene.add_child(enemy_inst)
+		if enemy_inst.has_signal("died"):
+			enemy_inst.connect("died", Callable(self, "_on_enemy_died"))
+
+func _on_enemy_died():
+	killed_enemies += 1
+	counter.text = "Kills: " + str(killed_enemies)

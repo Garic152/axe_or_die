@@ -16,7 +16,7 @@ var noise: Noise
 var tree_noise: Noise
 var stone_noise: Noise
 
-var width: int = 50
+var width: int = 100
 var height: int = width
 
 var source_id = 0
@@ -28,10 +28,6 @@ var stone_atlas_arr = [Vector2i(2, 3), Vector2i(4, 3), Vector2i(4, 4)]
 var ground_tiles_arr = []
 
 func _ready():
-	# setup health management
-	hearts_container.setMaxHearts(player.maxHealth)
-	player.HealthChanged.connect(hearts_container.updateHearts)
-	
 	noise = noise_height_text.noise
 	tree_noise = noise_tree_text.noise
 	stone_noise = noise_stone_text.noise
@@ -50,17 +46,19 @@ func choose_tree():
 	return Vector2i(-1, -1)
 
 func generate_world():
+	for x in range(-10, width + 10):
+		for y in range(-10, height + 10):
+			water_layer.set_cell(Vector2(x, y), source_id, water_atlas)
+			
 	for x in range(width):
 		for y in range(height):
 			var noise_val = noise.get_noise_2d(x, y)
 			if noise_val > 0.25:
 				ground_tiles_arr.append(Vector2i(x, y))
-			water_layer.set_cell(Vector2(x, y), source_id, water_atlas)
-		
 		ground_layer.set_cells_terrain_connect(ground_tiles_arr, 1, 0)
-		
+
+
 	# Add vegetation
-	var start_time = Time.get_ticks_usec()
 	for x in range(width):
 		for y in range(height):
 			if ground_layer.get_cell_atlas_coords(Vector2i(x, y)) == Vector2i(2, 6):
@@ -76,4 +74,3 @@ func generate_world():
 							props_layer.set_cell(Vector2i(x, y), 1, tree_atlas_arr.pick_random())
 					#if stone_noise_val > 0.45:
 					#	props_layer.set_cell(Vector2i(x, y), 1, stone_atlas_arr.pick_random())
-	print(Time.get_ticks_usec() - start_time)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkv3nagqoyxgx"]
+[gd_scene load_steps=20 format=3 uid="uid://dkv3nagqoyxgx"]
 
 [ext_resource type="Script" path="res://Scenes/enemy_goblin.gd" id="1_23ow5"]
 [ext_resource type="Texture2D" uid="uid://u14co1ox0kkh" path="res://Textures/Enemies/dungeonSprites_ v1.5/goblin_.png" id="1_pagap"]
+[ext_resource type="PackedScene" uid="uid://bb8bid4ekgwjn" path="res://Scenes/player_shadow.tscn" id="3_o5t26"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrfmv"]
 atlas = ExtResource("1_pagap")
@@ -74,6 +75,35 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_456up"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uj50l"]
+resource_name = "death"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_llt37"]
 resource_name = "hurt"
@@ -95,6 +125,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1fctq"]
 _data = {
 "RESET": SubResource("Animation_456up"),
+"death": SubResource("Animation_uj50l"),
 "hurt": SubResource("Animation_llt37")
 }
 
@@ -113,8 +144,9 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_23ow5")
-speed = 70
+speed = 90
 ray_length = 30
+max_health = 3
 
 [node name="ContextRays" type="Node2D" parent="."]
 position = Vector2(0, -3)
@@ -127,12 +159,6 @@ animation = &"run"
 frame = 2
 frame_progress = 0.6335
 
-[node name="Effects" type="AnimationPlayer" parent="AnimatedSprite2D"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_1fctq")
-}
-
 [node name="color" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -21.0
 offset_top = -21.0
@@ -140,7 +166,14 @@ offset_right = 19.0
 offset_bottom = 19.0
 color = Color(1, 1, 1, 0)
 
+[node name="Effects" type="AnimationPlayer" parent="AnimatedSprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_1fctq")
+}
+
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(-0.5, -7.5)
@@ -151,14 +184,20 @@ position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_1no8x")
 
 [node name="hurtbox" type="Area2D" parent="."]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_wg1jk")
 
 [node name="hurt" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.19
 one_shot = true
+
+[node name="PlayerShadow" parent="." instance=ExtResource("3_o5t26")]
+modulate = Color(1, 1, 1, 0.717647)
+position = Vector2(0, -1)
+scale = Vector2(0.861111, 0.861111)
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

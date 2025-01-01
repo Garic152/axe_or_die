@@ -1,6 +1,98 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgg0wp13758sy"]
+[gd_scene load_steps=22 format=3 uid="uid://cgg0wp13758sy"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_vgjpb"]
+[ext_resource type="PackedScene" uid="uid://bb8bid4ekgwjn" path="res://Scenes/player_shadow.tscn" id="2_6koiv"]
+[ext_resource type="AudioStream" uid="uid://chn4eqouw07di" path="res://sounds/hurt.wav" id="3_7yn3j"]
+[ext_resource type="AudioStream" uid="uid://cmgp5mhcygr2t" path="res://sounds/gameover.mp3" id="4_c3ncj"]
+[ext_resource type="AudioStream" uid="uid://dtoryplc2atmo" path="res://sounds/xDeviruchi - And The Journey Begins .wav" id="4_fj83o"]
+[ext_resource type="FontFile" uid="uid://147xth0kt1p4" path="res://fonts/Silver.ttf" id="6_htmdc"]
+[ext_resource type="PackedScene" uid="uid://lr2fpu3nd4bx" path="res://gui/heartsContainer.tscn" id="7_oksbx"]
+
+[sub_resource type="Animation" id="Animation_bflir"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CanvasLayer/death:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/Counter:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gcoo8"]
+resource_name = "death"
+length = 4.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CanvasLayer/death:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/Counter:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xey1i"]
+_data = {
+"RESET": SubResource("Animation_bflir"),
+"death": SubResource("Animation_gcoo8")
+}
 
 [sub_resource type="Animation" id="Animation_aw2b4"]
 length = 0.001
@@ -117,6 +209,65 @@ z_index = 1
 collision_mask = 6
 script = ExtResource("1_vgjpb")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+top_level = true
+light_mask = 7
+visibility_layer = 7
+anchors_preset = -1
+anchor_right = 0.341667
+anchor_bottom = 0.355556
+offset_left = -191.0
+offset_top = -113.0
+offset_right = 190.0
+offset_bottom = 110.0
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="death" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 80.0
+offset_top = 37.0
+offset_right = 1137.0
+offset_bottom = 631.0
+scale = Vector2(0.35, 0.35)
+theme_override_fonts/normal_font = ExtResource("6_htmdc")
+theme_override_font_sizes/normal_font_size = 100
+scroll_active = false
+tab_size = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("7_oksbx")]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 20.0
+scale = Vector2(0.55, 0.55)
+metadata/_edit_use_anchors_ = true
+
+[node name="Counter" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 6.75
+offset_top = 20.25
+offset_right = 196.75
+offset_bottom = 56.25
+scale = Vector2(0.35, 0.35)
+theme_override_fonts/normal_font = ExtResource("6_htmdc")
+theme_override_font_sizes/normal_font_size = 50
+text = "Kills: 0"
+scroll_active = false
+tab_size = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathAnimation" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../../Camera2D")
+libraries = {
+"": SubResource("AnimationLibrary_xey1i")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.65, 0.65)
+
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_tk5d4")
@@ -141,24 +292,43 @@ color = Color(1, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_j7s2s")
 }
+speed_scale = 1.4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_58xmg")
 
 [node name="hurtbox" type="Area2D" parent="."]
-collision_mask = 3
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_rjvax")
 
 [node name="hurt" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.5
 one_shot = true
 
 [node name="attack_cooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.4
 one_shot = true
+
+[node name="PlayerShadow" parent="." instance=ExtResource("2_6koiv")]
+modulate = Color(1, 1, 1, 0.717647)
+position = Vector2(0, -1)
+scale = Vector2(0.861111, 0.861111)
+
+[node name="hurt2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -3)
+stream = ExtResource("3_7yn3j")
+
+[node name="gameover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c3ncj")
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(299, 268)
+stream = ExtResource("4_fj83o")
+volume_db = -1.0
+autoplay = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

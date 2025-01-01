@@ -12,9 +12,11 @@ signal died
 @export var speed: int
 @export var ray_length: int
 
-@export var max_health = 3
+@export var max_health: int
+@onready var current_health: int = max_health
 
-var current_health: int = max_health
+var damage = 3
+var follow = true
 
 var move_directions = [
 	Vector2(1, 0).normalized(),          # 0 degrees
@@ -96,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		time_accumulator += delta
-		if time_accumulator >= update_interval:
+		if time_accumulator >= update_interval && follow:
 			time_accumulator -= update_interval
 			follow_player(players[0])
 	move_and_slide()
@@ -116,6 +118,9 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		current_health -= area.damage
 		knockback(area.global_position, area.knockback)
 		effects.play("hurt")
-	if current_health <= 0:
-		emit_signal("died")
-		queue_free()
+		if current_health <= 0:
+			effects.play("death")
+			follow = false
+			emit_signal("died")
+			await get_tree().create_timer(0.1).timeout
+			queue_free()
